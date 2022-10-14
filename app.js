@@ -8,6 +8,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieparser = require('cookie-parser');
 const compression = require('compression');
+const cors = require('cors');
 const app = express();
 
 const tourRouter = require('./routes/tourRoutes');
@@ -21,9 +22,13 @@ const globalErrorHandler = require('./controllers/errorController');
 // security headers middleware
 
 app.enable('trust proxy');
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
+
+app.use(cors());
+
 // app.use(express.static(`${__dirname}/public`));
 
 // app.use(helmet());
@@ -32,6 +37,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
+app.options('*', cors());
 const limiter = rateLimit({
   max: 100,
   windowMs: 60 * 60 * 1000, // 1 hour,
