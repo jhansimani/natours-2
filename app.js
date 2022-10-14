@@ -7,7 +7,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieparser = require('cookie-parser');
-
+const compression = require('compression');
 const app = express();
 
 const tourRouter = require('./routes/tourRoutes');
@@ -17,7 +17,6 @@ const viewRouter = require('./routes/viewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
-
 
 // security headers middleware
 
@@ -78,6 +77,7 @@ app.use(
 
 // routes
 
+app.use(compression());
 app.use('/', (req, res, next) => {
   req.requestTime = new Date();
   next();
