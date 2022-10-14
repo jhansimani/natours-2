@@ -17,7 +17,7 @@ const viewRouter = require('./routes/viewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
-// console.log(process.env.NODE_ENV);
+
 
 // security headers middleware
 
@@ -80,7 +80,6 @@ app.use(
 
 app.use('/', (req, res, next) => {
   req.requestTime = new Date();
-  // console.log(req.cookies);
   next();
 });
 // mounting

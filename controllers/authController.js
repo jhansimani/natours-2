@@ -87,7 +87,6 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
   // 2) check if the jwt is valid
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-  console.log(decoded);
   // 3) check if user still exists ( using deleted user token)
   const currentUser = await User.findById(decoded.id);
   if (!currentUser) {
@@ -202,7 +201,6 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     .createHash('sha256')
     .update(req.params.token)
     .digest('hex');
-  // console.log(hashedToken);
   const user = await User.findOne({
     passwordResetToken: hashedToken,
     passwordResetExpires: {
@@ -228,7 +226,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
   // 1) get user from collection
-  console.log(req.user);
+
   const user = await User.findById(req.user._id).select('+password');
 
   // 2) check if POSTed current password is correct

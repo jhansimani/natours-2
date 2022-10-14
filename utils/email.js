@@ -16,7 +16,6 @@ module.exports = class Email {
       return 1;
     }
 
-    // console.log('development');
     return nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
       port: process.env.EMAIL_PORT,
@@ -50,10 +49,7 @@ module.exports = class Email {
       //html
     };
     // 3) create a transport and send email
-    await this.newTransport().sendMail(mailOptions, (err, info) => {
-      // console.log(info);
-      // console.log(err);
-    });
+    await this.newTransport().sendMail(mailOptions, (err, info) => {});
   }
   async sendWelcome() {
     await this.send('welcome', 'Welcome to the natours family');

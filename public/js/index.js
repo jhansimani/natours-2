@@ -29,7 +29,6 @@ if (updateForm) {
     // const name = document.getElementById('name').value;
     // const email = document.getElementById('email').value;
     // const photo = document.getElementById('photo').value;
-    console.log(form);
     updateSettings(form, 'data');
     // updateUser(name, email);
   });
@@ -56,7 +55,6 @@ const bookBtn = document.getElementById('book-tour');
 if (bookBtn) {
   bookBtn.addEventListener('click', (e) => {
     e.target.textContent = 'Processing';
-    console.log(e.target.dataset);
     const tourId = e.target.dataset.tourId;
     bookTour(tourId);
     e.target.textContent = 'Book tour Again';

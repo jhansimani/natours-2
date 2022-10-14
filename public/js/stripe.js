@@ -7,9 +7,7 @@ import { showAlert } from './alert';
 export const bookTour = catchAsync(async (tourId) => {
   try {
     // get checkout session from api
-    console.log(tourId);
     const session = await axios(`/api/v1/bookings/checkout-session/${tourId}`);
-    console.log(session);
     // create checkout form + chance credit card
     await stripe.redirectToCheckout({
       sessionId: session.data.session.id,
